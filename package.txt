@@ -1,0 +1,12 @@
+composer require awssat/laravel-visits
+composer require gloudemans/shoppingcart
+composer require torann/geoip
+composer require predis/predis
+
+--------------------------
+git clone
+git add .
+git commit -m "commit"
+git push 
+--------------
+composer create-project --prefer-dist laravel/laravel ten-project-cua-ban 
