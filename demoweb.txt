@@ -1,0 +1,13 @@
+
+https://github.com/nguyenkhanh97nd/cake_shop
+// PHP MVC OOP
+---------------
+https://www.youtube.com/watch?v=rlJFPcFI9bg&list=PLCZQ7Spxsp_aUoV1Jc9dB_hcMtBudVzuw
+//------------------------
+// Laravel
+http://www.academia.edu/10199602/Do_an_FrameWork
+//---------------------------------------
+//-- PHP MVC OOP
+https://github.com/candysp/tutorial-framework-php/blob/master/config/main.php
+https://www.youtube.com/watch?v=65ngNziAwak&list=PL4m3Y7pzfrGmG7DEQ4lBaIW8mE6oivnCS&index=3
+--/////////
