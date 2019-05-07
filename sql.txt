@@ -1,0 +1,28 @@
+// lay product_type sap xet theo count(product)
+$data['menu_dropdown_f'] = product::select( DB::raw('COUNT(product_types.id) as count') , 'product_types.name as name','product_types.image as image','product_types.slug as slug')
+                        ->join('product_types' , 'products.product_type_id' ,'=', 'product_types.id')
+                        ->groupBy('products.product_type_id')
+                        ->orderBy(DB::raw('count(product_types.id)'),'DESC')->get();
+----------------------------------------------------------------------------------------
+// join 4
+$data['statement_history'] = PosGiftcode::select('pos_giftcode.giftcode_code','pos_order.order_id','pos_order.created_at','pos_order.order_price','pos_worker.worker_nickname','pos_customer.customer_fullname','pos_customer.customer_phone')
+        ->join('pos_order',function($join){
+            $join->on('pos_order.order_giftcard_code','pos_giftcode.giftcode_code')
+                ->on('pos_order.order_place_id','pos_giftcode.giftcode_place_id');
+        })
+        ->join('pos_orderdetail',function($join1){
+            $join1->on('pos_orderdetail.orderdetail_place_id','pos_order.order_place_id')
+            ->on('pos_order.order_id','pos_orderdetail.orderdetail_order_id');
+        })
+        ->join('pos_worker',function($join2){
+            $join2->on('pos_worker.worker_place_id','pos_orderdetail.orderdetail_place_id')
+                ->on('pos_orderdetail.orderdetail_worker_id','pos_worker.worker_id');
+        })
+        ->join('pos_customer',function($join3){
+            $join3->on('pos_customer.customer_id','pos_order.order_customer_id')
+                ->on('pos_customer.customer_place_id','pos_order.order_place_id');
+        })
+        ->where('giftcode_place_id',$this->getCurrentPlaceId())
+        ->where('pos_giftcode.giftcode_code',$code)        
+        ->get();
+-----------------------------------------------------------------------------------------------------------
