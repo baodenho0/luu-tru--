@@ -350,7 +350,7 @@ $(document).ready(function() {
 		<script >
  			var optionValue  = "Select1";
 			$("#selectbox").val(optionValue)
-			.find("option[value=" + optionValue +"]").attr('selected', true);
+			.find("option[value='" + optionValue +"']").attr('selected', true);
  		</script>
 -------------------------------------------------------------------------------------------------------------------------------------
 // search column .status dataTables
