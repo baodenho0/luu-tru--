@@ -50,7 +50,7 @@ public function send_mail($id){
 //ajax lay du lieu tat ca form
                     $('#logo_form').on('submit',function(event){
                       event.preventDefault();
-
+			//var form = $(this).serialize();
                       var form = $('#logo_form')[0];
                       var form_data = new FormData(form);
                       
