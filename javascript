@@ -17,6 +17,10 @@ function readURL(input) {
 $("input[type=file]").change(function() {
         readURL(this);
 });
+-----------------------------
+$("input#customFile").on("change", function(event){
+        $("#previewImage").attr("src",URL.createObjectURL(event.target.files[0]));
+   });
 ========================================================================
 ----------
 -----------------------------------------------------------------
