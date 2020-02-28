@@ -26,3 +26,18 @@ $data['statement_history'] = PosGiftcode::select('pos_giftcode.giftcode_code','p
         ->where('pos_giftcode.giftcode_code',$code)        
         ->get();
 -----------------------------------------------------------------------------------------------------------
+//multy where
+->where(function($query) use ($startDate, $endDate) {
+            $query->where(function($queryStartDate) use ($startDate, $endDate){
+                $queryStartDate->where('coupon_startdate','>=',$startDate)
+                ->where('coupon_startdate','<=',$endDate);
+            })
+            ->orWhere(function($queryEndDate) use ($startDate, $endDate){
+                $queryEndDate->where('coupon_deadline','>=',$startDate)
+                ->where('coupon_deadline','<=',$endDate);
+            })
+            ->orWhere(function($queryStartEnd) use ($startDate, $endDate){
+                $queryStartEnd->where('coupon_startdate','>=',$startDate)
+                ->where('coupon_deadline','<=',$endDate);
+            });
+        })
