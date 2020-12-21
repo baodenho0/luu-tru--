@@ -1,0 +1,29 @@
+** class_alias
+public function withAliases($userAliases = [])
+    {
+        $defaults = [
+            \Illuminate\Support\Facades\Auth::class => 'Auth',
+            \Illuminate\Support\Facades\Cache::class => 'Cache',
+            \Illuminate\Support\Facades\DB::class => 'DB',
+            \Illuminate\Support\Facades\Event::class => 'Event',
+            \Illuminate\Support\Facades\Gate::class => 'Gate',
+            \Illuminate\Support\Facades\Log::class => 'Log',
+            \Illuminate\Support\Facades\Queue::class => 'Queue',
+            \Illuminate\Support\Facades\Route::class => 'Route',
+            \Illuminate\Support\Facades\Schema::class => 'Schema',
+            \Illuminate\Support\Facades\Storage::class => 'Storage',
+            \Illuminate\Support\Facades\URL::class => 'URL',
+            \Illuminate\Support\Facades\Validator::class => 'Validator',
+        ];
+
+        if (! static::$aliasesRegistered) {
+            static::$aliasesRegistered = true;
+
+            $merged = array_merge($defaults, $userAliases);
+
+            foreach ($merged as $original => $alias) {
+                class_alias($original, $alias);
+            }
+        }
+    }
+=======================
