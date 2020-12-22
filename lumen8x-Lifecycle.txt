@@ -1,0 +1,41 @@
+note (*)
+required (+)
+class, function (-)
+
+----------------------------
+ * index.php
+
+ + $app = app.php
+ 	+ autoload.php
+		+ autoload_real.php	
+			+ autoload_static.php
+			+ autoload_namespaces.php
+			+ autoload_psr4.php
+			+ autoload_classmap.php
+			+ autoload_files.php
+	
+	- LoadEnvironmentVariables::bootstrap()
+
+	- date_default_timezone_set()
+
+	- $app = new Application( dirname(__DIR__) ) extends Container
+		+ use Concerns\RoutesRequests
+
+        	+ use Concerns\RegistersExceptionHandlers
+		- bootstrapContainer() 
+			- setInstance()
+
+			- registerContainerAliases()
+
+		- registerErrorHandling()
+
+		- bootstrapRouter() 
+			- $this->router = new Router($this);
+
+	- $app->router->group(
+		+ /../routes/web.php
+	)
+
+	* return $app;
+
+ * $app->run()
