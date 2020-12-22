@@ -32,6 +32,16 @@ class, function (-)
 		- bootstrapRouter() 
 			- $this->router = new Router($this);
 
+	- $app->singleton(Handler::class)
+
+	- $app->singleton(Kernel::class)
+
+	- $app->configure('app');
+
+	- $app->routeMiddleware([])
+
+	- $app->register(ServiceProvider::class)
+
 	- $app->router->group(
 		+ /../routes/web.php
 	)
