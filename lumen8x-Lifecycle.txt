@@ -63,6 +63,9 @@ class, function (-)
 		- RoutesRequests::sendThroughPipeline()
 
 		- RoutesRequests::handleFoundRoute()
+			- ExampleMiddleware::handle()
+			- RoutesRequests::callActionOnArrayBasedRoute()
+				- RoutesRequests::callControllerAction()
 
 	- $response->send() // Symfony\Component\HttpFoundation\Response::send()
 		- $this->sendHeaders();
