@@ -22,15 +22,19 @@ class, function (-)
 		+ use Concerns\RoutesRequests
 
         	+ use Concerns\RegistersExceptionHandlers
-		- bootstrapContainer() 
-			- setInstance()
+		
+		+ __construct()
+			- bootstrapContainer() 
+				- setInstance()
+				
+				- $this->instance()
 
-			- registerContainerAliases()
+				- registerContainerAliases()
 
-		- registerErrorHandling()
+			- registerErrorHandling()
 
-		- bootstrapRouter() 
-			- $this->router = new Router($this);
+			- bootstrapRouter() 
+				- $this->router = new Router($this);
 
 	- $app->singleton(Handler::class)
 
@@ -38,14 +42,32 @@ class, function (-)
 
 	- $app->configure('app');
 
-	- $app->routeMiddleware([])
+	- $app->routeMiddleware([]) // RoutesRequests::routeMiddleware()
 
 	- $app->register(ServiceProvider::class)
+		- register()
 
 	- $app->router->group(
 		+ /../routes/web.php
 	)
+		- addRoute()
+			- parseAction()
 
 	* return $app;
 
- * $app->run()
+ * $app->run() // RoutesRequests::run()
+	- $response = $this->dispatch($request)
+		- Application::boot()
+			- $this->bootProvider()
+
+		- RoutesRequests::sendThroughPipeline()
+
+		- RoutesRequests::handleFoundRoute()
+
+	- $response->send() // Symfony\Component\HttpFoundation\Response::send()
+		- $this->sendHeaders();
+
+        	- $this->sendContent();
+			echo $this->content;
+
+	- $this->callTerminableMiddleware($response)
