@@ -1,0 +1,1 @@
+# là một supper class dùng để tạo ra nhiều factory design pattern khác
