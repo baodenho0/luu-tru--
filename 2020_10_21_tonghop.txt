@@ -1,0 +1,40 @@
+middleware: 
+- tạo 1 middleware php artisan make:middleware CheckAge, sau đó đăng ký trong App/Middleware/Kernel
+- global middleware sử dụng với bất cứ yêu cầu đến hệ thống
+- middleware group là 1 group tập hợp các middleware
+- route middleware là 1 middleware với 1 route xác định
+- before middleware thực thi trước khi request xử lý
+- after middleware thực thi sau khi request xử lý nhưng trước response
+- terminate middleware thực thi sau response
+- sorting middleware thực thi các middleware theo thứ tự khai báo trong $middlewarePriority = []
+- middleware parameters nhận biến sau dấu : khai báo ở routes
+gates:
+- tạo quyền cho các hành động không liên quan đến model hoặc resource
+- tạo các phương thức trong hàm boot trong class AuthServiceProvider. Gate::define('route-name', function ()) trả về true false
+- sử dụng Gate::allows() để kiểm tra cho phép, Gate::denies không cho phép, Gate::check() cho phép, Gate::inspect trả về response đầy đủ
+- Gate::any() cho phép bất kỳ 1 hành động, Gate::none() không cho phép 1 hành động nào
+- Gate::authorize() cho phép hoặc trả về 403
+- Gate::before() chạy trước gate được khai báo, Gate::after() chạy sau gate được khai báo
+- trong blade view @can kiểm tra cho phép, @cannot không cho phép, @canany cho phép bất kỳ 1 hành động
+	@can('isAdmin')
+	@can('check', $post)
+policies:
+- tạo quyền cho các hành động liên quan đến model hoặc resource 
+- tạo policy php artisan make:policy PostPolicy --model=Post để tạo ra các phương thức CRUD, và thêm quyền của phương thức tương ứng
+- đăng ký model với policy tương ứng $policies = [] trong class AuthServiceProvider
+- sử dụng trong controller $this->authorize() cho phép hoặc trả về 403
+- sử dụng $user->can() cho phép
+- sử dụng ->middleware('can:create,App\Models\Post') cho phép trong middleware
+- sử dụng $this->authorizeResource(Post::class, 'post') khai báo trong construct của controller cho phép hoặc trả về 403 với phương thức tương ứng là
+  	index -> viewAny
+	show -> view
+	create -> create
+	store -> create
+	edit -> update
+	update -> update
+	destroy -> delete
+- trong blade view @can, @cannot, @canany tương tự như Gate
+	@can('create', App\Post::class)
+	@can('update', $post)
+	
+
